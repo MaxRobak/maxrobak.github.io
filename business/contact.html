@@ -1,5 +1,43 @@
 <html>
 <head>
+<link rel="stylesheet" href="style.css">
 <title> Contact </title>
-
+<nav>
+	<A HREF="index.html"> Home</A>
+	<A HREF="contact.html"> Contact Us</A>
+	<A HREF="services.html"> Services</A>
+</nav>
+</head>
+<body>
+	<center>
+		<h1>
+				College Cleaners
+		</h1>
+	</center>
+	<h2> Contact Form </h2>
+	<form id = "contact" action="#" method= 'get'>
+		<label for="fname"> Full name:</label><br>
+  		<input type="text" id="fname" name="fname" required><br>
+  		<label> Reason: </label> <br>
+  		<input type="radio" id="inquiry" name="reason" value="inquiry">
+ 		<label for="inquiry"> Service Inquiry</label><br>
+  		<input type="radio" id="issue" name="reason" value="issue">
+  		<label for="issue"> Issues with services</label><br>
+ 		<input type="radio" id="other" name="reason" value="other">
+  		<label for="other">Other</label><br>
+  		<label for="description"> Description:</label><br>
+  		<textarea rows="10" cols="50" name="description"> </textarea> <br> <br>
+  		<input type="submit" value="Submit">
+	</form>
+</body>
+<footer>
+	<p> 
+		<nav>
+			<A HREF="index.html"> Home</A>
+			<A HREF="contact.html"> Contact Us</A>
+			<A HREF="services.html"> Services</A>
+		</nav>
+	Copyright Max Robakiewicz 2020
+	</p>
+</footer>
 </html>
