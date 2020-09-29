@@ -16,7 +16,7 @@ body {
 
 footer {
    position: absolute;
-   bottom: 25;
+   bottom: 0;
    width: 98%;
    height: 30px; 
    text-align: center;
