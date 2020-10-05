@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/css" href = "xmlstyle.css" ?>
+<songs>
+	<song>
+		<artist>Fleetwood Mac</artist>
+		<title>Dreams</title>
+		<genre>Rock</genre>
+		<year>1977</year>
+	</song>
+	<song>
+		<artist>Led Zeppelin</artist>
+		<title>Stairway to Heaven</title>
+		<genre>Rock</genre>
+		<year>1971</year>
+	</song>
+	<song>
+		<artist>Pink Floyd</artist>
+		<title>Wish You Were Here</title>
+		<genre>Rock</genre>
+		<year>1975</year>
+	</song>
+	<song>
+		<artist>Rupert Holmes</artist>
+		<title>Escape</title>
+		<genre>Rock</genre>
+		<year>1979</year>
+	</song>
+	<song>
+		<artist>Lynyrd Skynyrd</artist>
+		<title>Free Bird</title>
+		<genre>Rock</genre>
+		<year>1973</year>
+	</song>
+	<song>
+		<artist>Kansas</artist>
+		<title>Carry on Wayward Son</title>
+		<genre>Rock</genre>
+		<year>1976</year>
+	</song>
+	<song>
+		<artist>Eagles</artist>
+		<title>Hotel California</title>
+		<genre>Rock</genre>
+		<year>1976</year>
+	</song>
+	<song>
+		<artist>The Animals</artist>
+		<title>House of the Rising Sun</title>
+		<genre>Rock</genre>
+		<year>1983</year>
+	</song>
+	<song>
+		<artist>Phil Collins</artist>
+		<title>In the Air Tonight</title>
+		<genre>Pop</genre>
+		<year>1981</year>
+	</song>
+	<song>
+		<artist>Dire Straits</artist>
+		<title>Sultans of Swing</title>
+		<genre>Rock</genre>
+		<year>1978</year>
+	</song>
+</songs>
