@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quick Pick</title>
+</head>
+<body>
+	<script type="text/javascript">
+	function get_random48(numbers) {
+		var num = Math.floor(Math.random() * (48) + 1);
+		for (var i = 0; i < 5; i++) {
+			if (numbers[i] == num){
+				return get_random48(numbers);
+			}
+		}
+		return num;
+	}
+	var numbers = [0,0,0,0,0];
+	for (var i = 0; i < 5; i++) {
+		numbers[i] = get_random48(numbers);
+	}
+	numbers.sort(function(a, b){return a - b});
+	document.write("The quick pick numbers are: ", numbers[0], " ", numbers[1], " ", numbers[2], " ", numbers[3], " ", numbers[4], "<br>");
+	var lucky = Math.floor(Math.random() * (18) + 1);
+	document.write("The lucky ball number is: ", lucky, "<br>", "<br>");
+	var input_nums = prompt("Enter winning numbers sepearated by a single space", "28 30 31 42 43");
+	var win_lucky = prompt("Enter winning lucky ball number", "13");
+	var win_nums = input_nums.split(" ");
+	document.write("The winning numbers are: ", win_nums[0], " ", win_nums[1], " ", win_nums[2], " ", win_nums[3], " ", win_nums[4], "<br>");
+	document.write("The lucky ball number is: ", win_lucky, "<br>", "<br>", "<br>");
+	var counter = 0;
+	for (var i = 0; i < 5; i++){
+		for (var j = 0; j < 5; j++){
+			if (numbers[i] == win_nums[j]) {
+				counter++;
+			}
+		}
+	}
+	var luckball = (lucky == win_lucky);
+	if (counter == 5 && luckball) {
+		document.write("You win! Your payout is: $7,000 a WEEK for LIFE");
+	} else if (counter == 5 && !luckball) {
+		document.write("You win! Your payout is: $25,000 a YEAR for LIFE");
+	} else if (counter == 4 && luckball) {
+		document.write("You win! Your payout is: $5,000");
+	} else if (counter == 4 && !luckball) {
+		document.write("You win! Your payout is: $200");
+	} else if (counter == 3 && luckball) {
+		document.write("You win! Your payout is: $150");
+	} else if (counter == 3 && !luckball) {
+		document.write("You win! Your payout is: $20");
+	} else if (counter == 2 && luckball) {
+		document.write("You win! Your payout is: $25");
+	} else if (counter == 2 && !luckball) {
+		document.write("You win! Your payout is: $3");
+	} else if (counter == 1 && luckball) {
+		document.write("You win! Your payout is: $6");
+	}  else if (counter == 0 && luckball) {
+		document.write("You win! Your payout is: $4");
+	} else {
+		document.write("You lose, better luck next time!");
+	}
+	</script>
+</body>
+</html>
