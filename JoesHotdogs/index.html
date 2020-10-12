@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Joe's Hotdogs</title>
+</head>
+<body>
+	<h1>Welcome to Joe's Hotdogs</h1>
+	<h2>Your Order</h2>
+	<script type="text/javascript">
+		var dogs = prompt("How many hotdogs do you want?", "0");
+		var fries = prompt("How many fries do you want?", "0");
+		var drinks = prompt("How many drinks do you want?", "0");
+		var subtotal = (dogs * 3.25) + (fries * 2) + (drinks * 1.5);
+		var special = false;
+		if (subtotal >= 20){
+			special = true;
+			subtotal *= .9;
+			subtotal = Math.ceil(subtotal * 100)/100;
+		}
+		var tax = subtotal * .0625;
+		tax = Math.ceil(tax * 100)/100;
+		var total = subtotal + tax;
+		total = Math.ceil(total * 100)/100;
+		document.write(dogs, " hotdogs were ordered at $3.25 each for $", dogs * 3.25, " <br>");
+		document.write(fries," fries were ordered at $2.00 each for $", fries * 2," <br>");
+		document.write(drinks, " drinks were ordered at $1.50 each for $",  drinks * 1.5, " <br>");
+		if(special)
+			document.write("You applied for the 10% Special <br>");
+		document.write("Subtotal: $", subtotal, "<br>");
+		document.write("Meals Tax: $" , tax, "<br>");
+		document.write("Total: $", total);
+
+	</script>
+</body>
+</html>
