@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Amicable Numbers</title>
+	<script language="javascript">
+		window.onload=function(){
+			document.getElementById("btn").onclick = function()
+			{
+				n1 = document.form1.first.value;
+				n2 = document.form1.second.value;
+				numbers = n1 + " " + n2 + "<br/>";
+				document.getElementById("result").innerHTML = numbers;
+				var final = amicable(n1, n2);
+				if (final) {
+					document.getElementById("factor").innerHTML = n1 + " and " + n2 + " are amicable " + "<br/>";
+				} else {
+					document.getElementById("factor").innerHTML = n1 + " and " + n2 + " are not amicable " + "<br/>";
+				}
+				// Test Code for isFactor
+				// if (isFactor(n1, n2)) {
+				// 	document.getElementById("factor").innerHTML = n2 + " is a factor of " + n1 + "<br/>";
+				// } else {
+				// 	document.getElementById("factor").innerHTML = n2 + " is not a factor of " + n1 + "<br/>";
+				// }
+				// Test code for showArray	
+				// var testarray = [n1, n2, 23, 45, 23];
+				// showArray(testarray);
+				// Test Code for AddArray
+				// var testarray = [3, 23, 45, 23, parseInt(n1), parseInt(n2)];
+				// n = addArray(testarray);	
+				// document.getElementById("factor").innerHTML = n + "<br/>";
+				// Test code for get Factors	
+				// showArray(getFactors(n1));	
+			}
+		}
+		function isFactor(n, f)
+		{
+			if (n % f == 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		function showArray(array)
+		{
+			var arraytext = "";
+			for (var i = 0; i < array.length; i++) {
+				if (i == 0) {
+					if (array.length == 1) {
+						arraytext += "[" + array[i] + "]";
+					} else {
+						arraytext += "[" + array[i] + ", ";
+					}
+				}
+				else if (i == array.length - 1) {
+					arraytext += array[i] + "]";
+				}
+				else {
+					arraytext += array[i] + ", ";
+				}
+			}
+			document.getElementById("n1ans").innerHTML = arraytext + "<br/>";
+		}
+		function addArray(array)
+		{
+			var result = 0;
+			for (var i = 0; i < array.length; i++) {
+				result += array[i];
+			}
+			return result;
+		}
+		function getFactors(n)
+		{
+			var array = [];
+			for (var i = 0; i <= n/2; i++) {
+				if (isFactor(n, i)) {
+					array.push(i);
+				}
+			}
+			return array;
+		}
+		function amicable(x, y)
+		{
+			var xfactors = getFactors(x);
+			var yfactors = getFactors(y);
+			var xval = addArray(xfactors);
+			var yval = addArray(yfactors);
+			var amicable = (xval == y && yval == x);
+			return amicable;
+		}
+	</script>
+</head>
+<body>
+	<form name = "form1">
+		First Number: <input type="number" id="first" name="first" min="1"> <br/> <br/>
+		Second Number: <input type="number" id="second" name="second" min="1"> <br/> <br/>
+		<input type= "button" id="btn" value = "Amicable"> <br/> <br/>
+	</form>
+	<hr>
+	<div id = "result"></div> <br /> 
+	<hr>
+	<div id = "factor"></div> <br /> 
+	<hr>
+</body>
+</html>
