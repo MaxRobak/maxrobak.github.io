@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Jade Delight</title>
+
+	<script language="javascript">
+	window.onload = function() {
+	
+	//Sets street and city invisible because pickup is selected first
+	document.forms[0].street.style.display = 'none';
+	document.forms[0].city.style.display = 'none';
+	// Function to update subtotal, tax and total in the form
+	function updatetotal()
+	{
+		var cost = 0.00;
+		cost = document.forms[0].quan0.selectedIndex * 4.5;
+		cost += document.forms[0].quan1.selectedIndex * 6.25;
+		cost += document.forms[0].quan2.selectedIndex * 5.25;
+		cost += document.forms[0].quan3.selectedIndex * 6.5;
+		cost += document.forms[0].quan4.selectedIndex * 2.35;
+		document.getElementById("subtotal").value = Math.round(100*cost)/100;
+		var tax = cost * 0.0625;
+		document.getElementById("tax").value = Math.round(100*tax)/100;
+		var total = cost + tax;
+		document.getElementById("total").value = Math.round(100*total)/100;
+	}
+
+	// For the next chunk, whenever a selection happens
+	// All of the data is updated
+	document.forms[0].quan0.onchange = function() 
+	{
+		var selectedValue = this.selectedIndex;
+		var costs = document.getElementsByName("cost");
+		costs[0].value = Math.round(100 * 4.5 * selectedValue)/100;
+		updatetotal();
+	}
+	document.forms[0].quan1.onchange = function() 
+	{
+		var selectedValue = this.selectedIndex;
+		var costs = document.getElementsByName("cost");
+		costs[1].value = Math.round(100 * 6.25 * selectedValue)/100;
+		updatetotal();
+	}
+	document.forms[0].quan2.onchange = function() 
+	{
+		var selectedValue = this.selectedIndex;
+		var costs = document.getElementsByName("cost");
+		costs[2].value = Math.round(100 * 5.25 * selectedValue)/100;
+		updatetotal();
+	}
+	document.forms[0].quan3.onchange = function() 
+	{
+		var selectedValue = this.selectedIndex;
+		var costs = document.getElementsByName("cost");
+		costs[3].value = Math.round(100 * 6.5 * selectedValue)/100;
+		updatetotal();
+	}
+	document.forms[0].quan4.onchange = function() 
+	{
+		var selectedValue = this.selectedIndex;
+		var costs = document.getElementsByName("cost");
+		costs[4].value = Math.round(100 * 2.35 * selectedValue)/100;
+		updatetotal();
+	}
+
+	// Sees if pickup or deliver is chosen and displays the
+	// street and city accordingly
+	document.getElementsByName("p_or_d")[0].onchange = function()
+	{
+		if (this.checked) {
+			document.forms[0].street.style.display = 'none';
+			document.forms[0].city.style.display = 'none';
+		}
+	}
+	document.getElementsByName("p_or_d")[1].onchange = function()
+	{
+		if (this.checked) {
+			document.forms[0].street.style.display = '';
+			document.forms[0].city.style.display = '';
+		}
+	}
+
+	// Hold the submit calls when the form is submitted
+	document.forms[0].onsubmit = function()
+	{
+		//Validation for first name
+		if (document.getElementsByName("fname")[0].value == "") {
+			window.history.back();
+			alert("Enter a first name");
+			return;
+		}
+
+		// Validation for last name
+		if (document.getElementsByName("lname")[0].value == "") {
+			window.history.back();
+			alert("Enter a last name");
+			return;
+		}
+
+		// Validation for phone number
+		if (document.getElementsByName("phone")[0].value == "") {
+			window.history.back();
+			alert("Enter a phone number");
+			return;
+		}
+
+		// Validation for phone length
+		var phonelength = document.getElementsByName("phone")[0].value.length;
+		if (phonelength != 10) {
+			window.history.back();
+			alert("Enter a valid phone number");
+			return;
+		}
+		var pickup = true;
+		// Getting the time
+		var d = new Date(); 
+		var h = d.getHours(); 
+		var m = d.getMinutes(); 
+
+		// Get Adds time to delivery, and ensures street or city if needed
+		if (document.getElementsByName("p_or_d")[0].checked) {
+			m += 15;
+		} else {
+			if (document.forms[0].street.value == "") {
+				window.history.back();
+				alert("Enter a street");
+				return;
+			}
+			if (document.forms[0].city.value == "") {
+				window.history.back();
+				alert("Enter a city");
+				return;
+			}
+			pickup = false;
+			m += 30;
+		}
+
+		// If minutes are more than 60 or hours are more than 24, fixes time
+		if (m >= 60) {
+			m -= 60;
+			// If m is less than 10 adds 0 for placement
+			if (m < 10) {
+				m = m.toString();
+				m = "0" + m;
+			}
+			h += 1;
+		}
+		if (h >= 24) {
+			h -= 24;
+		}
+
+		// Gets the order with quantity and name
+		var order = "";
+		if (document.forms[0].quan0.selectedIndex > 0) {
+			order += document.forms[0].quan0.selectedIndex + " Chicken Chop Suey ";
+		}
+		if (document.forms[0].quan1.selectedIndex > 0) {
+			order += document.forms[0].quan1.selectedIndex + " Sweet and Sour Pork ";
+		}
+		if (document.forms[0].quan2.selectedIndex > 0) {
+			order += document.forms[0].quan2.selectedIndex + " Shrimp Lo Mein ";
+		}
+		if (document.forms[0].quan3.selectedIndex > 0) {
+			order += document.forms[0].quan3.selectedIndex + " Moo Shi Chicken ";
+		}
+		if (document.forms[0].quan4.selectedIndex > 0) {
+			order += document.forms[0].quan4.selectedIndex + " Fried Rice ";
+		}
+
+		// Alerts the person based on if they had pickup or not
+		if (pickup) {
+			alert("Thank you for your order! Your order of " + order + "will be ready to be picked up at " + h + ":" + m + " Price: " + document.getElementById("total").value);
+		} else {
+			alert("Thank you for your order! Your order of " + order + "will be delivered at " + h + ":" + m + " Price: " + document.getElementById("total").value);
+		}
+	}
+	}	
+	</script>
+</head>
+
+<body>
+<script language="javascript">
+
+function MenuItem(name, cost)
+{
+	this.name = name;
+	this.cost=cost;
+}
+
+menuItems = new Array(
+	new MenuItem("Chicken Chop Suey", 4.5),
+	new MenuItem("Sweet and Sour Pork", 6.25),
+	new MenuItem("Shrimp Lo Mein", 5.25),
+	new MenuItem("Moo Shi Chicken", 6.5),
+	new MenuItem("Fried Rice", 2.35)
+);
+
+function makeSelect(name, minRange, maxRange)
+{
+	var t= "";
+	t = "<select name='" + name + "' size='1'>";
+	for (j=minRange; j<=maxRange; j++)
+	   t += "<option>" + j + "</option>";
+	t+= "</select>"; 
+	return t;
+}
+</script>
+
+<h1>Jade Delight</h1>
+<form>
+
+<p>First Name: <input type="text"  name='fname' /></p>
+<p>Last Name*:  <input type="text"  name='lname' /></p>
+<p>Street: <input type="text"  name='street' /></p>
+<p>City: <input type="text"  name='city' /></p>
+<p>Phone*: <input type="text"  name='phone' /></p>
+<p> 
+	<input type="radio"  name="p_or_d" value = "pickup" checked="checked"/>Pickup  
+	<input type="radio"  name='p_or_d' value = 'delivery'/>
+	Delivery
+</p>
+<table border="0" cellpadding="3">
+  <tr>
+    <th>Select Item</th>
+    <th>Item Name</th>
+    <th>Cost Each</th>
+    <th>Total Cost</th>
+  </tr>
+<script language="javascript">
+
+  var s = "";
+  for (i=0; i< menuItems.length; i++)
+  {
+	  s += "<tr><td>";
+	  s += makeSelect("quan" + i, 0, 10);
+	  s += "</td><td>" + menuItems[i].name + "</td>";
+	  s += "<td> $ " + menuItems[i].cost.toFixed(2) + "</td>";
+	  s += "<td>$<input type='text' name='cost'/></td></tr>";
+  }
+  document.writeln(s);
+</script>
+</table>
+<p>Subtotal: 
+   $<input type="text"  name='subtotal' id="subtotal" />
+</p>
+<p>Mass tax 6.25%:
+  $ <input type="text"  name='tax' id="tax" />
+</p>
+<p>Total: $ <input type="text"  name='total' id="total" />
+</p>
+
+<input type = "submit" value = "Submit Order" />
+
+</form>
+</body>
+</html>
