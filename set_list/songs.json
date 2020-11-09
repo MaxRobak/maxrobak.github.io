@@ -14,7 +14,7 @@
 	{
 		"artist" : "Pink Floyd",
 		"title" : "Wish You Were Here",
-		"genres" : ["Rock"],
+		"genres" : ["Rock", "Pop"],
 		"year" : "1975"
 	},
 	{
