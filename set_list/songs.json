@@ -2,60 +2,60 @@
 	[{
 		"artist" : "Fleetwood Mac",
 		"title" : "Dreams",
-		"genre" : ["Rock"],
+		"genres" : ["Rock"],
 		"year" : "1977"
 	},
 	{
 		"artist" : "Led Zeppelin",
 		"title" : "Stairway to Heaven",
-		"genre" : ["Rock"],
+		"genres" : ["Rock"],
 		"year" : "1971"
 	},
 	{
 		"artist" : "Pink Floyd",
 		"title" : "Wish You Were Here",
-		"genre" : ["Rock"],
+		"genres" : ["Rock"],
 		"year" : "1975"
 	},
 	{
 		"artist" : "The Temptations",
 		"title" : "My Girl",
-		"genre" : ["Soul"],
+		"genres" : ["Soul"],
 		"year" : "1965"
 	},
 	{
 		"artist" : "Lynyrd Skynyrd",
 		"title" : "Free Bird",
-		"genre" : ["Rock"],
+		"genres" : ["Rock"],
 		"year" : "1973"
 	},
 	{
 		"artist" : "Sam and Dave",
 		"title" : "Soul Man",
-		"genre" : ["Soul"],
+		"genres" : ["Soul"],
 		"year" : "1967"
 	},
 	{
 		"artist" : "Glenn Miller",
 		"title" : "In The Mood",
-		"genre" : ["Pop"],
+		"genres" : ["Pop"],
 		"year" : "1946"
 	},
 	{
 		"artist" : "The Animals",
 		"title" : "House of the Rising Sun",
-		"genre" : ["Rock"],
+		"genres" : ["Rock"],
 		"year" : "1983"
 	},
 	{
 		"artist" : "Phil Collins",
 		"title" : "In the Air Tonight",
-		"genre" : ["Pop"],
+		"genres" : ["Pop"],
 		"year" : "1981"
 	},
 	{
 		"artist" : "Dire Straits",
 		"title" : "Sultans of Swing",
-		"genre" : ["Rock"],
+		"genres" : ["Rock"],
 		"year" : "1978"
 	}]
