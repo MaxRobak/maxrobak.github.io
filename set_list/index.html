@@ -3,27 +3,95 @@
 <head>
 <meta charset="utf-8">
 <title>Set List</title>
-	<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-	<!--script language="javascript" src="animals.json"></script-->
-	
+	<script>
+		// Function that prints a song
+		function printSong(song){
+			strHTML = "";
+			strHTML +=  "<b>" + song.title + "</b> </br> " + "Artist: " +  song.artist+ "</br> Genre: ";
+			song.genres.forEach(function(genre, idx, array) {
+				// If last genre prints break instead of comma
+				if (idx == array.length - 1){
+					strHTML += genre + " </br>";
+				} else {
+					strHTML += genre + ", ";
+				}
+			})
+			strHTML += "Year: " + song.year + "</br> </br>";
+			return strHTML;
+		}
+		function loadFile(selection) {
+			/* Step 1: Make instance of request object...
+			...to make HTTP request after page is loaded*/
+			request = new XMLHttpRequest();
+ 
+			// Step 2: Set the URL for the AJAX request to be the JSON file
+ 
+			request.open("GET", "https://maxrobak.github.io/set_list/songs.json", true);
+
+ 
+			// Step 3: set up event handler/callback
+
+			request.onreadystatechange = function() {
+ 
+				if (request.readyState == 4 && request.status == 200) {
+
+					// Step 5: wait for done + success
+
+					result = request.responseText;
+					songs = JSON.parse(result);
+					
+					strHTML = "";
+					//Prints Songs based on selection
+					if (selection == "All"){
+						songs.forEach(function(song) { 
+					  		strHTML += printSong(song);
+						}) 
+					} else {
+						songs.forEach(function(song) { 
+							song.genres.forEach(function(genre) {
+								//Filters song by genre
+								if (selection == genre)
+					  				strHTML += printSong(song);
+					  		})
+						})
+					}
+					//Changes the div inner Html to the string
+					document.getElementById("data").innerHTML = strHTML;  
+				} else if (request.readyState == 4 && request.status != 200) {
+					// Checking for error with opening file
+					document.getElementById("data").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
+				} else if (request.readyState == 3) {
+					// Checking for error with opening file
+					document.getElementById("data").innerHTML = "Too soon!  Try again";
+				}
+
+			}
+		// Step 4: fire off the HTTP request
+			request.send();
+		}
+
+		//Function that filters based on genre selection
+		function filter() {
+			loadFile(document.getElementById("genres").value);
+		}
+	</script>
 
 </head>
 
-<body>
-	<script language="javascript">
-	$.get( "songs.json", 
-		  function( data ) {
-			str = JSON.stringify(data);
-			document.write(str);
-			strHTML= "";
-		/*data.forEach(function(animal) { 
-		strHTML += "<li>" 
-			    + animal.name + " : " 
-				+ animal.type + "</li>";
-			}) 
-	strHTML += "</ul>";
-	document.write (strHTML);  */
-	})
-</script>
+<body onload="loadFile('All')">
+	<form>
+		<label for = "genres">Filter By Genre: </label>
+		<select name = "genres" id = "genres">
+			<option value = "All">All</option>
+			<option value = "Rock">Rock</option>
+			<option value = "Pop">Pop</option>
+			<option value = "Soul">Soul</option>
+		</select>
+		<button type="button" onclick="filter()">Filter</button>
+	</form>
+
+	<h1>Songs</h1>
+	<div id="data">Loading...</div>
 </body>
+
 </html>
