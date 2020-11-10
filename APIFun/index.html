@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+	<title>Person API</title>
+	<meta charset="utf-8"/>
+	<script>
+		function getPerson() {
+			/* Step 1: Make instance of request object...
+			...to make HTTP request after page is loaded*/
+			request = new XMLHttpRequest();
+			console.log("1 - request object created");
+ 
+			// Step 2: Set the URL for the AJAX request to be the JSON file
+ 
+			request.open("GET", "https://randomuser.me/api/?nat=US", true)
+
+			console.log("2 - opened request file");
+ 
+			// Step 3: set up event handler/callback
+
+			request.onreadystatechange = function() {
+				console.log("3 - readystatechange event fired.");
+ 
+				if (request.readyState == 4 && request.status == 200) {
+
+					// Step 5: wait for done + success
+					console.log("5 - response received");
+					result = request.responseText;
+					//alert(result);
+					person = JSON.parse(result);
+					//alert(JSON.stringify(person));
+					strHTML = "Name: ";
+					strHTML += "<b>" + person.results[0].name.title + " " + person.results[0].name.first + " " + person.results[0].name.last + "</b> </br>";
+					strHTML += "Gender: " + person.results[0].gender + " </br>";
+					strHTML += "Address: " + person.results[0].location.street.number + " " + person.results[0].location.street.name + " " + person.results[0].location.city + " " +person.results[0].location.state + " " + person.results[0].location.postcode + " </br>";
+					strHTML += "Email: " +  person.results[0].email + "</br>";
+					strHTML += "Age: " + person.results[0].dob.age + "</br>";
+					strHTML += "Date of Birth: " + person.results[0].dob.date + "<br> </br>";
+					strHTML += "<img src= '" +person.results[0].picture.large + "'alt='person'>";
+					document.getElementById("data").innerHTML = strHTML; 
+					
+				}
+				else if (request.readyState == 4 && request.status != 200) {
+
+					document.getElementById("data").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
+
+				}
+
+				else if (request.readyState == 3) {
+
+					document.getElementById("data").innerHTML = "Too soon!  Try again";
+
+				}
+
+			}
+		// Step 4: fire off the HTTP request
+			request.send();
+			console.log("4 - Request sent");
+		}
+	</script>
+</head>
+
+
+<body onload="getPerson()">
+
+	<h1>Person</h1>
+	<div id="data">Loading...</div> <br>
+	<div>The API I chose creates a fake person and information about a person as well as a photo of that person. </br> There are more parts of the data which can be accessed but I didn't find it necessary</div> <br>
+	<div>I found the API on: https://github.com/public-apis/public-apis</div> <br>
+	<div>The only option I used in the API was making every person's nationality US with ?nat=US </div> <br>
+	<div>One application where this API would be helpful would be if are testing getting data inputs from a use and you want realistic information, this would allow those fields to be easily filled in. </br> Another application where this could be helpful would be if you are making AI's for maybe a videogame and need names for the characters there are playing as, you could choose to only use that part of the data which the API provides. </div>
+</body>
+</html>
